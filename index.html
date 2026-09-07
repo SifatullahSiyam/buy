@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buy Me a Coffee - Support My Work</title>
+    <title>Sifatullah Siyam - Support My Work</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>">
     <style>
         * {
             margin: 0;
@@ -11,250 +12,643 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --accent: #ff6b6b;
+            --light: #f8f9fa;
+            --dark: #2d3748;
+            --text: #555;
+            --border: #e9ecef;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
+            color: var(--text);
+        }
+
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(118, 75, 162, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            animation: drift 20s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes drift {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, 30px); }
         }
 
         .container {
             background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            max-width: 600px;
+            border-radius: 25px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
+            max-width: 700px;
             width: 100%;
             overflow: hidden;
+            animation: slideUp 0.6s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
-            padding: 40px 30px;
+            padding: 50px 40px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: moveBackground 20s linear infinite;
+        }
+
+        @keyframes moveBackground {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
         }
 
         .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
+            font-size: 2.8em;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-        }
-
-        .header p {
-            font-size: 1.1em;
-            opacity: 0.95;
-            margin-bottom: 5px;
+            gap: 15px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .coffee-emoji {
-            font-size: 1.2em;
+            font-size: 1.1em;
+            display: inline-block;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .header p {
+            font-size: 1.15em;
+            opacity: 0.95;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .header .subtitle {
+            font-size: 0.95em;
+            opacity: 0.85;
+            margin-top: 10px;
         }
 
         .content {
-            padding: 40px 30px;
+            padding: 50px 40px;
         }
 
         .intro-text {
             text-align: center;
-            color: #555;
-            margin-bottom: 30px;
-            font-size: 1.05em;
-            line-height: 1.6;
+            color: var(--text);
+            margin-bottom: 40px;
+            font-size: 1.1em;
+            line-height: 1.8;
+            font-weight: 500;
         }
 
         .payment-methods {
             display: grid;
-            gap: 25px;
-            margin-bottom: 30px;
+            gap: 28px;
+            margin-bottom: 35px;
         }
 
         .payment-card {
-            background: #f8f9fa;
-            border-radius: 15px;
-            padding: 25px;
-            border: 2px solid #e9ecef;
-            transition: all 0.3s ease;
+            background: linear-gradient(135deg, var(--light) 0%, #ffffff 100%);
+            border-radius: 18px;
+            padding: 32px;
+            border: 2px solid var(--border);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             text-align: center;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .payment-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .payment-card:hover::before {
+            left: 100%;
         }
 
         .payment-card:hover {
-            transform: translateY(-5px);
-            border-color: #667eea;
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.2);
+            transform: translateY(-8px) scale(1.02);
+            border-color: var(--primary);
+            box-shadow: 0 20px 50px rgba(102, 126, 234, 0.3);
         }
 
         .payment-card h3 {
-            color: #667eea;
-            margin-bottom: 15px;
-            font-size: 1.3em;
+            color: var(--primary);
+            margin-bottom: 12px;
+            font-size: 1.4em;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 10px;
+            font-weight: 700;
         }
 
         .payment-icon {
-            font-size: 1.5em;
+            font-size: 2em;
+        }
+
+        .payment-desc {
+            color: #999;
+            margin-bottom: 15px;
+            font-size: 0.95em;
+            font-weight: 500;
         }
 
         .qr-code {
-            margin: 20px 0;
-            padding: 15px;
+            margin: 25px 0;
+            padding: 18px;
             background: white;
-            border-radius: 10px;
+            border-radius: 12px;
             display: inline-block;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .qr-code:hover {
+            transform: scale(1.05);
         }
 
         .qr-code img {
-            width: 200px;
-            height: 200px;
+            width: 220px;
+            height: 220px;
             border-radius: 8px;
             display: block;
         }
 
         .payment-number {
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            border: 2px solid #667eea;
-            margin: 15px 0;
-            font-size: 1.1em;
-            font-weight: 600;
-            color: #667eea;
+            background: linear-gradient(135deg, #f0f4ff 0%, #f8f9fa 100%);
+            padding: 16px;
+            border-radius: 12px;
+            border: 2px solid var(--primary);
+            margin: 18px 0;
+            font-size: 1.15em;
+            font-weight: 700;
+            color: var(--primary);
             word-break: break-all;
             font-family: 'Courier New', monospace;
+            transition: all 0.3s ease;
+        }
+
+        .payment-number:hover {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
         }
 
         .copy-btn {
-            background: #667eea;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
+            padding: 12px 28px;
+            border-radius: 10px;
             cursor: pointer;
-            font-size: 0.9em;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            margin-top: 10px;
+            font-size: 0.95em;
+            font-weight: 700;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            margin-top: 12px;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .copy-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .copy-btn:active::after {
+            width: 300px;
+            height: 300px;
         }
 
         .copy-btn:hover {
-            background: #764ba2;
-            transform: scale(1.05);
-        }
-
-        .copy-btn:active {
-            transform: scale(0.95);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
         }
 
         .success-message {
             display: none;
-            background: #d4edda;
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
             color: #155724;
-            padding: 10px 15px;
-            border-radius: 8px;
-            margin-top: 10px;
-            font-size: 0.9em;
-        }
-
-        .footer {
-            background: #f8f9fa;
-            padding: 20px 30px;
-            text-align: center;
-            color: #888;
-            border-top: 1px solid #e9ecef;
-        }
-
-        .footer p {
-            margin: 5px 0;
+            padding: 12px 16px;
+            border-radius: 10px;
+            margin-top: 12px;
             font-size: 0.95em;
+            font-weight: 600;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .divider {
-            height: 1px;
-            background: linear-gradient(to right, transparent, #ddd, transparent);
-            margin: 10px 0;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--border), transparent);
+            margin: 35px 0;
+        }
+
+        .features-box {
+            background: linear-gradient(135deg, #f0f4ff 0%, #f8f9fa 100%);
+            padding: 28px;
+            border-radius: 15px;
+            margin-top: 35px;
+            border-left: 5px solid var(--primary);
+        }
+
+        .features-box p:first-child {
+            color: var(--primary);
+            text-align: center;
+            font-weight: 700;
+            margin-bottom: 16px;
+            font-size: 1.1em;
+        }
+
+        .features-box ul {
+            list-style: none;
+            text-align: center;
+            color: var(--text);
+            font-size: 0.98em;
+            line-height: 2;
+        }
+
+        .features-box li {
+            animation: fadeIn 0.6s ease backwards;
+        }
+
+        .features-box li:nth-child(1) { animation-delay: 0.1s; }
+        .features-box li:nth-child(2) { animation-delay: 0.2s; }
+        .features-box li:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .links-section {
+            margin-top: 35px;
+            padding-top: 35px;
+            border-top: 2px solid var(--border);
+        }
+
+        .links-title {
+            text-align: center;
+            color: var(--dark);
+            font-weight: 700;
+            margin-bottom: 20px;
+            font-size: 1.2em;
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .link-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 18px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+            border: 2px solid;
+            color: white;
+            cursor: pointer;
+        }
+
+        .link-btn.github {
+            background: #333;
+            border-color: #333;
+        }
+
+        .link-btn.github:hover {
+            background: #555;
+            border-color: #555;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .link-btn.portfolio {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-color: var(--primary);
+        }
+
+        .link-btn.portfolio:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .link-btn.email {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .link-btn.email:hover {
+            background: #ff5252;
+            border-color: #ff5252;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        .email-display {
+            text-align: center;
+            padding: 18px;
+            background: linear-gradient(135deg, #ffe5e5 0%, #fff0f0 100%);
+            border-radius: 12px;
+            border: 2px dashed var(--accent);
+            margin-top: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .email-display:hover {
+            background: linear-gradient(135deg, #ffcccc 0%, #ffe5e5 100%);
+            transform: scale(1.02);
+        }
+
+        .email-display p {
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 0.95em;
+            margin: 0;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, var(--light) 0%, #ffffff 100%);
+            padding: 28px 40px;
+            text-align: center;
+            color: #888;
+            border-top: 2px solid var(--border);
+        }
+
+        .footer p {
+            margin: 8px 0;
+            font-size: 0.95em;
+            font-weight: 500;
         }
 
         .heart-icon {
-            color: #ff6b6b;
-            animation: heartbeat 1.5s infinite;
+            color: var(--accent);
+            animation: heartbeat 1.5s ease-in-out infinite;
+            display: inline-block;
         }
 
         @keyframes heartbeat {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
+            50% { transform: scale(1.3); }
         }
 
-        @media (max-width: 600px) {
+        .scroll-indicator {
+            text-align: center;
+            padding: 15px;
+            color: #999;
+            font-size: 0.85em;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 35px 25px;
+            }
+
             .header h1 {
-                font-size: 1.8em;
+                font-size: 2.2em;
             }
 
             .content {
-                padding: 25px 20px;
+                padding: 30px 25px;
+            }
+
+            .payment-card {
+                padding: 24px;
+            }
+
+            .qr-code img {
+                width: 180px;
+                height: 180px;
+            }
+
+            .links-grid {
+                grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+                gap: 12px;
+            }
+
+            .link-btn {
+                padding: 12px 16px;
+                font-size: 0.85em;
+            }
+
+            .footer {
+                padding: 20px 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                border-radius: 18px;
             }
 
             .header {
                 padding: 30px 20px;
             }
 
+            .header h1 {
+                font-size: 1.8em;
+                gap: 10px;
+            }
+
+            .coffee-emoji {
+                font-size: 1em;
+            }
+
+            .content {
+                padding: 20px 18px;
+            }
+
             .payment-card {
-                padding: 20px;
+                padding: 18px;
             }
 
             .qr-code img {
-                width: 150px;
-                height: 150px;
+                width: 140px;
+                height: 140px;
             }
+
+            .copy-btn {
+                padding: 10px 20px;
+                font-size: 0.85em;
+            }
+
+            .links-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: var(--dark);
+            color: #fff;
+            text-align: center;
+            border-radius: 8px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -60px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
         }
     </style>
 </head>
 <body>
+    <div class="background-animation"></div>
+
     <div class="container">
         <div class="header">
-            <h1><span class="coffee-emoji">☕</span> Buy Me a Coffee</h1>
-            <p>Support my work and help me keep creating amazing projects!</p>
+            <div class="header-content">
+                <h1><span class="coffee-emoji">☕</span> Support My Work</h1>
+                <p>Hi, I'm <strong>Sifatullah Siyam</strong></p>
+                <p class="subtitle">Full-stack Developer | Open Source Enthusiast | Blockchain Explorer</p>
+            </div>
         </div>
 
         <div class="content">
             <p class="intro-text">
-                Your support means the world to me! <span class="heart-icon">❤️</span> Choose any payment method below to support my work.
+                Your support means the world to me! <span class="heart-icon">❤️</span> 
+                <br>Every contribution helps me create amazing projects and contribute to the community.
             </p>
 
             <div class="payment-methods">
                 <!-- bKash -->
                 <div class="payment-card">
                     <h3><span class="payment-icon">📱</span> bKash</h3>
-                    <p style="color: #666; margin-bottom: 12px; font-size: 0.95em;">Mobile Payment (Bangladesh)</p>
+                    <p class="payment-desc">Mobile Payment (Bangladesh)</p>
                     <div class="payment-number" id="bkash-number">01575839866</div>
-                    <button class="copy-btn" onclick="copyToClipboard('bkash-number', this)">Copy Number</button>
-                    <div class="success-message" id="bkash-success">Copied to clipboard! ✓</div>
-                    <p style="color: #999; font-size: 0.85em; margin-top: 10px;">Send via bKash Personal account</p>
+                    <button class="copy-btn" onclick="copyToClipboard('bkash-number', this)">📋 Copy Number</button>
+                    <div class="success-message" id="bkash-success">✓ Copied to clipboard!</div>
+                    <p style="color: #999; font-size: 0.85em; margin-top: 10px;">Send via bKash Personal</p>
                 </div>
 
                 <!-- Nagad -->
                 <div class="payment-card">
                     <h3><span class="payment-icon">💳</span> Nagad</h3>
-                    <p style="color: #666; margin-bottom: 12px; font-size: 0.95em;">Mobile Payment (Bangladesh)</p>
+                    <p class="payment-desc">Mobile Payment (Bangladesh)</p>
                     <div class="payment-number" id="nagad-number">01575839866</div>
-                    <button class="copy-btn" onclick="copyToClipboard('nagad-number', this)">Copy Number</button>
-                    <div class="success-message" id="nagad-success">Copied to clipboard! ✓</div>
+                    <button class="copy-btn" onclick="copyToClipboard('nagad-number', this)">📋 Copy Number</button>
+                    <div class="success-message" id="nagad-success">✓ Copied to clipboard!</div>
                     <p style="color: #999; font-size: 0.85em; margin-top: 10px;">Send via Nagad Mobile Wallet</p>
                 </div>
 
                 <!-- Binance -->
                 <div class="payment-card">
                     <h3><span class="payment-icon">₿</span> Binance QR Code</h3>
-                    <p style="color: #666; margin-bottom: 12px; font-size: 0.95em;">Cryptocurrency Payment</p>
+                    <p class="payment-desc">Cryptocurrency Payment</p>
                     <div class="qr-code">
-                        <img id="binance-qr" src="https://raw.githubusercontent.com/SifatullahSiyam/buy/refs/heads/main/Binance.png" alt="Binance QR Code">
+                        <img id="binance-qr" src="https://raw.githubusercontent.com/SifatullahSiyam/buy/refs/heads/main/Binance.png" alt="Binance QR Code" onerror="handleImageError(this)">
                     </div>
                     <p style="color: #999; font-size: 0.85em;">Scan with your Binance App</p>
                 </div>
@@ -262,24 +656,49 @@
 
             <div class="divider"></div>
 
-            <div style="background: #f0f4ff; padding: 20px; border-radius: 10px; margin-top: 30px;">
-                <p style="color: #667eea; text-align: center; font-weight: 600; margin-bottom: 10px;">💝 Every contribution helps!</p>
-                <p style="color: #555; text-align: center; font-size: 0.95em; line-height: 1.6;">
-                    Your support enables me to:<br>
-                    ✨ Create more projects<br>
-                    🚀 Improve existing features<br>
-                    📚 Share knowledge with the community
-                </p>
+            <!-- Links Section -->
+            <div class="links-section">
+                <div class="links-title">🔗 Connect With Me</div>
+                <div class="links-grid">
+                    <a href="https://github.com/SifatullahSiyam" target="_blank" rel="noopener noreferrer" class="link-btn github tooltip">
+                        <span>🐙</span> GitHub
+                        <span class="tooltiptext">Visit my GitHub profile</span>
+                    </a>
+                    <a href="https://sifatullahsiyam.github.io/portfolio/" target="_blank" rel="noopener noreferrer" class="link-btn portfolio tooltip">
+                        <span>🌐</span> Portfolio
+                        <span class="tooltiptext">Check my work</span>
+                    </a>
+                    <a href="mailto:sifatullahsiyam8@gmail.com" class="link-btn email tooltip">
+                        <span>✉️</span> Email
+                        <span class="tooltiptext">Send me an email</span>
+                    </a>
+                </div>
+
+                <div class="email-display" onclick="copyEmail()">
+                    <p>📧 sifatullahsiyam8@gmail.com</p>
+                </div>
+            </div>
+
+            <!-- Features Box -->
+            <div class="features-box">
+                <p>💝 Your support helps me:</p>
+                <ul>
+                    <li>✨ Create innovative open-source projects</li>
+                    <li>🚀 Develop new features and improvements</li>
+                    <li>📚 Share knowledge with the developer community</li>
+                </ul>
             </div>
         </div>
 
         <div class="footer">
-            <p><strong>Thank you for your support!</strong></p>
-            <p>Questions? Feel free to reach out on GitHub</p>
+            <p><strong>Thank you for your generosity! 🙏</strong></p>
+            <p>Every contribution, no matter the size, makes a difference</p>
+            <div class="scroll-indicator">Made with <span class="heart-icon">❤️</span> by Sifatullah Siyam</div>
         </div>
     </div>
 
     <script>
+        // Copy to clipboard function with enhanced feedback
         function copyToClipboard(elementId, button) {
             const element = document.getElementById(elementId);
             const text = element.innerText;
@@ -290,19 +709,101 @@
                 const successMessage = document.getElementById(successId);
                 successMessage.style.display = 'block';
                 
-                // Hide after 2 seconds
+                // Animate success message
+                successMessage.style.animation = 'slideIn 0.3s ease';
+                
+                // Hide after 2.5 seconds
                 setTimeout(() => {
-                    successMessage.style.display = 'none';
-                }, 2000);
+                    successMessage.style.opacity = '0';
+                    successMessage.style.transition = 'opacity 0.3s ease';
+                    setTimeout(() => {
+                        successMessage.style.display = 'none';
+                        successMessage.style.opacity = '1';
+                        successMessage.style.transition = 'none';
+                    }, 300);
+                }, 2500);
 
-                // Change button text temporarily
+                // Change button text and animate
                 const originalText = button.innerText;
+                button.style.transform = 'scale(0.95)';
                 button.innerText = '✓ Copied!';
+                
                 setTimeout(() => {
+                    button.style.transform = 'scale(1)';
                     button.innerText = originalText;
                 }, 1500);
             }).catch(err => {
-                alert('Failed to copy. Please try again.');
+                alert('Failed to copy. Please try again or manually select the text.');
+                console.error('Copy error:', err);
+            });
+        }
+
+        // Copy email function
+        function copyEmail() {
+            const email = 'sifatullahsiyam8@gmail.com';
+            navigator.clipboard.writeText(email).then(() => {
+                const emailDisplay = document.querySelector('.email-display');
+                const originalBg = emailDisplay.style.background;
+                emailDisplay.style.background = 'linear-gradient(135deg, #c3e6cb 0%, #d4edda 100%)';
+                
+                setTimeout(() => {
+                    emailDisplay.style.background = originalBg;
+                }, 2000);
+            }).catch(err => {
+                console.error('Email copy error:', err);
+            });
+        }
+
+        // Handle image load errors
+        function handleImageError(img) {
+            console.warn('Failed to load QR code image');
+            img.style.display = 'none';
+            const parent = img.parentElement;
+            parent.innerHTML = '<p style="color: #999; padding: 20px;">QR Code failed to load. Please try again later.</p>';
+        }
+
+        // Smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Add interactive effects
+        document.querySelectorAll('.payment-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.borderColor = 'var(--primary)';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.borderColor = 'var(--border)';
+            });
+        });
+
+        // Page load animation
+        window.addEventListener('load', () => {
+            document.body.style.animation = 'fadeIn 0.6s ease';
+        });
+
+        // Add analytics tracking (optional)
+        function trackEvent(eventName, data = {}) {
+            console.log(`Event: ${eventName}`, data);
+        }
+
+        // Track copy events
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                trackEvent('payment_copied', { method: this.closest('.payment-card').querySelector('h3').innerText });
+            });
+        });
+
+        // Service Worker registration for offline support (optional)
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').catch(err => {
+                console.log('ServiceWorker registration failed: ', err);
             });
         }
     </script>
