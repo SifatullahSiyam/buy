@@ -1,1 +1,310 @@
-hello world 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Me a Coffee - Support My Work</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+            margin-bottom: 5px;
+        }
+
+        .coffee-emoji {
+            font-size: 1.2em;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        .intro-text {
+            text-align: center;
+            color: #555;
+            margin-bottom: 30px;
+            font-size: 1.05em;
+            line-height: 1.6;
+        }
+
+        .payment-methods {
+            display: grid;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .payment-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .payment-card:hover {
+            transform: translateY(-5px);
+            border-color: #667eea;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.2);
+        }
+
+        .payment-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .payment-icon {
+            font-size: 1.5em;
+        }
+
+        .qr-code {
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        .qr-code img {
+            width: 200px;
+            height: 200px;
+            border-radius: 8px;
+            display: block;
+        }
+
+        .payment-number {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #667eea;
+            margin: 15px 0;
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #667eea;
+            word-break: break-all;
+            font-family: 'Courier New', monospace;
+        }
+
+        .copy-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .copy-btn:hover {
+            background: #764ba2;
+            transform: scale(1.05);
+        }
+
+        .copy-btn:active {
+            transform: scale(0.95);
+        }
+
+        .success-message {
+            display: none;
+            background: #d4edda;
+            color: #155724;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 20px 30px;
+            text-align: center;
+            color: #888;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .footer p {
+            margin: 5px 0;
+            font-size: 0.95em;
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, #ddd, transparent);
+            margin: 10px 0;
+        }
+
+        .heart-icon {
+            color: #ff6b6b;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .content {
+                padding: 25px 20px;
+            }
+
+            .header {
+                padding: 30px 20px;
+            }
+
+            .payment-card {
+                padding: 20px;
+            }
+
+            .qr-code img {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><span class="coffee-emoji">☕</span> Buy Me a Coffee</h1>
+            <p>Support my work and help me keep creating amazing projects!</p>
+        </div>
+
+        <div class="content">
+            <p class="intro-text">
+                Your support means the world to me! <span class="heart-icon">❤️</span> Choose any payment method below to support my work.
+            </p>
+
+            <div class="payment-methods">
+                <!-- bKash -->
+                <div class="payment-card">
+                    <h3><span class="payment-icon">📱</span> bKash</h3>
+                    <p style="color: #666; margin-bottom: 12px; font-size: 0.95em;">Mobile Payment (Bangladesh)</p>
+                    <div class="payment-number" id="bkash-number">01XXXXXXXXXX</div>
+                    <button class="copy-btn" onclick="copyToClipboard('bkash-number', this)">Copy Number</button>
+                    <div class="success-message" id="bkash-success">Copied to clipboard! ✓</div>
+                    <p style="color: #999; font-size: 0.85em; margin-top: 10px;">Send via bKash Personal account</p>
+                </div>
+
+                <!-- Nagad -->
+                <div class="payment-card">
+                    <h3><span class="payment-icon">💳</span> Nagad</h3>
+                    <p style="color: #666; margin-bottom: 12px; font-size: 0.95em;">Mobile Payment (Bangladesh)</p>
+                    <div class="payment-number" id="nagad-number">01XXXXXXXXXX</div>
+                    <button class="copy-btn" onclick="copyToClipboard('nagad-number', this)">Copy Number</button>
+                    <div class="success-message" id="nagad-success">Copied to clipboard! ✓</div>
+                    <p style="color: #999; font-size: 0.85em; margin-top: 10px;">Send via Nagad Mobile Wallet</p>
+                </div>
+
+                <!-- Binance -->
+                <div class="payment-card">
+                    <h3><span class="payment-icon">₿</span> Binance QR Code</h3>
+                    <p style="color: #666; margin-bottom: 12px; font-size: 0.95em;">Cryptocurrency Payment</p>
+                    <div class="qr-code">
+                        <img id="binance-qr" src="https://via.placeholder.com/200?text=Binance+QR+Code" alt="Binance QR Code">
+                    </div>
+                    <p style="color: #999; font-size: 0.85em;">Scan with your Binance App</p>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div style="background: #f0f4ff; padding: 20px; border-radius: 10px; margin-top: 30px;">
+                <p style="color: #667eea; text-align: center; font-weight: 600; margin-bottom: 10px;">💝 Every contribution helps!</p>
+                <p style="color: #555; text-align: center; font-size: 0.95em; line-height: 1.6;">
+                    Your support enables me to:<br>
+                    ✨ Create more projects<br>
+                    🚀 Improve existing features<br>
+                    📚 Share knowledge with the community
+                </p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>Thank you for your support!</strong></p>
+            <p>Questions? Feel free to reach out on GitHub</p>
+        </div>
+    </div>
+
+    <script>
+        function copyToClipboard(elementId, button) {
+            const element = document.getElementById(elementId);
+            const text = element.innerText;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                // Show success message
+                const successId = elementId.replace('-number', '-success');
+                const successMessage = document.getElementById(successId);
+                successMessage.style.display = 'block';
+                
+                // Hide after 2 seconds
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 2000);
+
+                // Change button text temporarily
+                const originalText = button.innerText;
+                button.innerText = '✓ Copied!';
+                setTimeout(() => {
+                    button.innerText = originalText;
+                }, 1500);
+            }).catch(err => {
+                alert('Failed to copy. Please try again.');
+            });
+        }
+    </script>
+</body>
+</html>
