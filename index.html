@@ -30,71 +30,222 @@
 
         body {
             font-family: 'Poppins', 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background: #000 url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(0,212,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
             min-height: 100vh;
             color: var(--text-light);
             position: relative;
-            overflow-x: hidden;
-        }
-
-        /* Animated background */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 80% 80%, rgba(255, 0, 110, 0.08) 0%, transparent 40%);
-            animation: gradientShift 15s ease-in-out infinite;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        @keyframes gradientShift {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.7; transform: scale(1.1); }
-        }
-
-        /* Floating particles */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
             overflow: hidden;
         }
 
-        .particle {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            background: var(--accent);
-            border-radius: 50%;
-            opacity: 0.5;
-            animation: float 20s infinite linear;
+        /* ===== DATA TRANSFER BACKGROUND EFFECTS ===== */
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
         }
 
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) translateX(0) scale(1) rotate(0deg);
+        /* Holographic Grid */
+        .hologram-grid {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: linear-gradient(0deg, 
+                transparent 0%, 
+                rgba(0, 212, 255, 0.03) 50%, 
+                transparent 100%);
+            background-size: 100% 100px;
+            animation: scanLines 8s linear infinite;
+        }
+
+        @keyframes scanLines {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100px); }
+        }
+
+        /* Data Streams - Vertical falling lines */
+        .data-stream {
+            position: absolute;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, 
+                transparent 0%, 
+                var(--accent) 50%, 
+                transparent 100%);
+            animation: dataFlow 4s linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes dataFlow {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100vh); }
+        }
+
+        /* Laser Beams - Horizontal crossing lines */
+        .laser-beam {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg,
+                transparent 0%,
+                var(--accent-2) 50%,
+                transparent 100%);
+            animation: laserScan 6s ease-in-out infinite;
+            opacity: 0.5;
+        }
+
+        @keyframes laserScan {
+            0% { transform: scaleX(0) translateX(-50%); }
+            50% { transform: scaleX(1) translateX(0); }
+            100% { transform: scaleX(0) translateX(50%); }
+        }
+
+        /* Data Packets - Diagonal moving squares */
+        .data-packet {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent);
+            animation: packetMove 15s linear infinite;
+            opacity: 0.4;
+        }
+
+        @keyframes packetMove {
+            0% { 
+                transform: translateX(-100%) translateY(-100%) rotate(0deg);
                 opacity: 0;
             }
-            10% {
-                opacity: 0.5;
-            }
-            90% {
-                opacity: 0.5;
-            }
-            100% {
-                transform: translateY(-100vh) translateX(100px) scale(0) rotate(360deg);
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { 
+                transform: translateX(100vw) translateY(100vh) rotate(360deg);
                 opacity: 0;
             }
+        }
+
+        /* Hexagon Patterns */
+        .hex-pattern {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border: 2px solid var(--accent);
+            clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+            animation: hexFloat 20s ease-in-out infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes hexFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-50px) rotate(180deg); }
+        }
+
+        /* Matrix Rain - Falling characters */
+        .matrix-char {
+            position: absolute;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 14px;
+            color: var(--accent);
+            opacity: 0.5;
+            animation: matrixRain 8s linear infinite;
+            text-shadow: 0 0 10px var(--accent);
+        }
+
+        @keyframes matrixRain {
+            0% { 
+                transform: translateY(-100px);
+                opacity: 0.8;
+            }
+            100% { 
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+
+        /* Pulse Circles */
+        .pulse-circle {
+            position: absolute;
+            border: 1px solid var(--accent-2);
+            border-radius: 50%;
+            animation: pulsateCircle 3s ease-out infinite;
+            opacity: 0.4;
+        }
+
+        @keyframes pulsateCircle {
+            0% { 
+                transform: scale(0);
+                opacity: 0.8;
+            }
+            100% { 
+                transform: scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Scanning Wave */
+        .scan-wave {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent 0%,
+                var(--gold) 20%,
+                var(--accent) 50%,
+                var(--gold) 80%,
+                transparent 100%);
+            animation: waveScan 12s linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes waveScan {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100vh); }
+        }
+
+        /* Connected Nodes */
+        .node-dot {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 15px var(--accent);
+            animation: nodePulse 2s ease-in-out infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes nodePulse {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 0 0 15px var(--accent);
+            }
+            50% { 
+                transform: scale(1.5);
+                box-shadow: 0 0 30px var(--accent);
+            }
+        }
+
+        /* Animated background gradient */
+        .gradient-wave {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(255, 0, 110, 0.1) 0%, transparent 50%);
+            animation: waveShift 15s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes waveShift {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(50px, 50px) scale(1.1); }
         }
 
         .container {
@@ -895,8 +1046,58 @@
     </style>
 </head>
 <body>
-    <!-- Particles Background -->
-    <div class="particles" id="particles"></div>
+    <!-- MATRIX BACKGROUND EFFECTS -->
+    <div class="matrix-bg">
+        <div class="gradient-wave"></div>
+        <div class="hologram-grid"></div>
+        <div class="scan-wave" style="top: 10%;"></div>
+        <div class="scan-wave" style="top: 30%; animation-delay: 2s;"></div>
+        <div class="scan-wave" style="top: 50%; animation-delay: 4s;"></div>
+        <div class="scan-wave" style="top: 70%; animation-delay: 6s;"></div>
+    </div>
+
+    <!-- Data Streams -->
+    <div class="matrix-bg">
+        <div class="data-stream" style="left: 5%; animation-delay: 0s;"></div>
+        <div class="data-stream" style="left: 15%; animation-delay: 1s;"></div>
+        <div class="data-stream" style="left: 25%; animation-delay: 2s;"></div>
+        <div class="data-stream" style="left: 35%; animation-delay: 0.5s;"></div>
+        <div class="data-stream" style="left: 45%; animation-delay: 1.5s;"></div>
+        <div class="data-stream" style="left: 55%; animation-delay: 2.5s;"></div>
+        <div class="data-stream" style="left: 65%; animation-delay: 0.7s;"></div>
+        <div class="data-stream" style="left: 75%; animation-delay: 1.7s;"></div>
+        <div class="data-stream" style="left: 85%; animation-delay: 2.7s;"></div>
+        <div class="data-stream" style="left: 95%; animation-delay: 1.2s;"></div>
+    </div>
+
+    <!-- Laser Beams -->
+    <div class="matrix-bg">
+        <div class="laser-beam" style="top: 15%; width: 50%; left: 25%;"></div>
+        <div class="laser-beam" style="top: 35%; width: 60%; left: 20%; animation-delay: 1s;"></div>
+        <div class="laser-beam" style="top: 55%; width: 70%; left: 15%; animation-delay: 2s;"></div>
+        <div class="laser-beam" style="top: 75%; width: 55%; left: 22.5%; animation-delay: 1.5s;"></div>
+    </div>
+
+    <!-- Data Packets -->
+    <div class="matrix-bg" id="packetContainer"></div>
+
+    <!-- Hexagon Patterns -->
+    <div class="matrix-bg">
+        <div class="hex-pattern" style="top: 10%; left: 10%; animation-delay: 0s;"></div>
+        <div class="hex-pattern" style="top: 60%; right: 10%; animation-delay: 2s;"></div>
+        <div class="hex-pattern" style="top: 80%; left: 50%; animation-delay: 4s;"></div>
+    </div>
+
+    <!-- Node Dots -->
+    <div class="matrix-bg">
+        <div class="node-dot" style="top: 20%; left: 15%; animation-delay: 0s;"></div>
+        <div class="node-dot" style="top: 40%; left: 80%; animation-delay: 0.5s;"></div>
+        <div class="node-dot" style="top: 60%; left: 25%; animation-delay: 1s;"></div>
+        <div class="node-dot" style="top: 25%; right: 15%; animation-delay: 1.5s;"></div>
+    </div>
+
+    <!-- Matrix Characters -->
+    <div class="matrix-bg" id="matrixCharContainer"></div>
 
     <div class="container">
         <!-- Header -->
@@ -992,20 +1193,35 @@
     </div>
 
     <script>
-        // Create floating particles
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 40;
+        // Create Data Packets
+        function createDataPackets() {
+            const container = document.getElementById('packetContainer');
+            for (let i = 0; i < 12; i++) {
+                const packet = document.createElement('div');
+                packet.className = 'data-packet';
+                packet.style.left = Math.random() * 100 + '%';
+                packet.style.top = Math.random() * 100 + '%';
+                packet.style.animationDelay = Math.random() * 15 + 's';
+                packet.style.animationDuration = (10 + Math.random() * 20) + 's';
+                container.appendChild(packet);
+            }
+        }
 
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 10 + 's';
-                particle.style.animationDuration = (15 + Math.random() * 20) + 's';
-                particle.style.width = (Math.random() * 3 + 1) + 'px';
-                particle.style.height = particle.style.width;
-                particlesContainer.appendChild(particle);
+        // Create Matrix Characters
+        function createMatrixChars() {
+            const container = document.getElementById('matrixCharContainer');
+            const chars = ['₀', '₁', '█', '▓', '▒', '░', '◆', '◇', '■', '□', '►', '◄', '▲', '▼'];
+            
+            for (let i = 0; i < 20; i++) {
+                const char = document.createElement('div');
+                char.className = 'matrix-char';
+                char.textContent = chars[Math.floor(Math.random() * chars.length)];
+                char.style.left = Math.random() * 100 + '%';
+                char.style.top = Math.random() * -100 + 'px';
+                char.style.animationDelay = Math.random() * 8 + 's';
+                char.style.animationDuration = (6 + Math.random() * 4) + 's';
+                char.style.fontSize = (12 + Math.random() * 20) + 'px';
+                container.appendChild(char);
             }
         }
 
@@ -1075,7 +1291,8 @@
 
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
-            createParticles();
+            createDataPackets();
+            createMatrixChars();
         });
 
         // Smooth scroll
